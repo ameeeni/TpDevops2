@@ -40,3 +40,5 @@ jobs:
             -Dsonar.projectKey=ameeeni_TpDevops2
             -Dsonar.organization=ameeeni
             -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.java.binaries=target/classes
+
