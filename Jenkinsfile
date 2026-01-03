@@ -5,27 +5,16 @@ pipeline {
         maven 'Maven-3.9'
     }
 
-    environment {
-        APP_NAME = 'tpDevops2'
-    }
-
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Build & Test (with coverage)') {
             steps {
-                sh 'mvn clean compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                sh 'mvn clean verify'
             }
         }
 
@@ -38,10 +27,10 @@ pipeline {
 
     post {
         success {
-            echo 'Build SUCCESS!'
+            echo 'Build SUCCESS! Coverage ≥ 80%'
         }
         failure {
-            echo 'Build FAILED!'
+            echo 'Build FAILED! Test coverage is below 80%'
         }
     }
 }
